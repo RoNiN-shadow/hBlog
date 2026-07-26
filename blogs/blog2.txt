@@ -1,0 +1,17 @@
+* Another Blog
+
+Did you know you can use Haskell?
+Best Practises
+
+- Modularity
+- Convinienc
+- Monads
+
+Some antoher
+
+# Speed
+# Monoids
+
+This is a basic Haskell code
+
+> main = putStrLn "Hello, World!"

@@ -1,0 +1,10 @@
+* Hello
+
+This is my blog
+
+- And I like it 
+
+# you may use different things
+
+> main = do
+     putStrLn "hello"
