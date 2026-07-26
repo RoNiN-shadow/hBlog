@@ -26,6 +26,8 @@ convert env title doc =
   let head =
         Html.title_ (eBlogName env <> " - " <> title)
           <> Html.stylesheet_ (eStylePath env)
+          <> Html.meta_ "viewport" "width=device-width, initial-scale=1.0"
+
       article = foldMap convertStructure doc
 
       websiteTitle = Html.h_ 1 (Html.link_ "index.html" $ Html.txt_ $ eBlogName env)
