@@ -98,3 +98,32 @@ pre {
   border: 1px solid var(--border-color);
   margin-bottom: 1.5rem;
 }
+
+/* --- Адаптація для мобільних пристроїв (екрани менше 600px) --- */
+@media (max-width: 600px) {
+  body {
+    /* Зменшуємо відступи: 1rem зверху/знизу та 1rem з боків */
+    padding: 1rem; 
+  }
+
+  /* Робимо заголовки компактнішими */
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Трохи економимо місце в блоках з кодом */
+  pre {
+    padding: 1rem;
+    border-radius: 6px; /* Трохи менше заокруглення на маленьких екранах */
+  }
+}
