@@ -41,6 +41,7 @@ convertDirectory env inpDir outputDir = do
   let outputHtmls = runReader (txtsToRenderedHtml filesToProcess) env
   copyFiles outputDir filesToCopy
   writeFiles outputDir outputHtmls
+  copyFile (eStylePath env) outputDir
 
 ------------------------------------
 
