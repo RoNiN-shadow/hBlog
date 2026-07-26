@@ -23,6 +23,10 @@
           nixfmt-rfc-style # formatter for nix
           haskellPackages.wai-app-static # static local web server
 
+          # Add build-blog command to the dev shell
+          (writeShellScriptBin "build-blog" ''
+            cabal run blog -- convert-dir -i blogs/ -o docs/ -N "Mark's Blog"
+          '')
         ];
       };
     };
