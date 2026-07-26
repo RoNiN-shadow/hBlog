@@ -10,7 +10,7 @@ newtype Html = Html String
 
 type Title = String
 
-newtype Head = Head String
+newtype Head = Head String deriving (Eq, Show)
 
 -- | Basically a html tag that may have other "structures"
 newtype Structure = Structure String
