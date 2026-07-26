@@ -1,0 +1,28 @@
+* My thoughts on about this blog
+
+Hey! I build this blog generator to learn Haskell. It was quit 'tuff and fun challange. I don't know what I'm gonna do with this blog yet. Probably talking why Haskell is good... yeah...
+Cool thing about this blog generator(whatever u call it) is that it can do this, watch:
+
+# This is an ordered list btw
+# And it goes on
+# and next...
+
+You got the idea. I don't follow the gramma rules ;) I just type in Neovim. But heres another thing look:
+
+- Unordered list!
+- Wow, who would thought about this?
+- and it goes on...
+
+Great. What else can we do with that huh? Well coding! Here it goes:
+
+> myBestFunction :: Int -> Int
+myBestFunction n = n*2
+
+Cool right? It doesn't have the syntax highlight like in your IDE, but still looks pretty cool. And btw, I didn't wrote that awsome CSS; AI did. I think, I'll do some CSS in the future. I just nedded it to look pretty huh.
+
+...I think I will blog here before publishing on the main platforms such as Telegram or LinkedIn.
+
+I only added the Heading and those lists, and code block as you can see I have very basic markup language(it is not Markdown!), hihih ;-)
+Still feels much better to type in Vim rather Google docs.
+
+I think it is enogh for today. Stay safe! And don't forget to like and subscribe
