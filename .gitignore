@@ -22,4 +22,8 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 
+# Ignore nix stuff
 .direnv/
+
+# Ignore compiled pages
+docs/
