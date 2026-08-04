@@ -42,8 +42,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cabal-
 
-      - name: Create a output folder
-        run: mkdir docs/
+      - name: Clean output folder
+        run: rm -rf docs/
 
       - name: Build static Blog
         # Uses cabal
