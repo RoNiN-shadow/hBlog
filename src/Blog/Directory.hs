@@ -73,7 +73,6 @@ data DirContents = DirContents
 
 -- * Build index page
 
---
 buildIndex :: [(FilePath, Markup.Document)] -> Reader Env Html.Html
 buildIndex files = do
   env <- ask
@@ -86,8 +85,11 @@ buildIndex files = do
         Html.h_ 1 (Html.link_ "index.html" (Html.txt_ (eBlogName env)))
           <> Html.h_ 2 (Html.txt_ "Posts")
 
+      documentation =
+        Html.h_ 3 (Html.link_ "api/index.html" $ Html.txt_ "Documentation")
+
       articlePrews = foldMap buildPreview files
-  pure $ Html.html_ head (header <> articlePrews)
+  pure $ Html.html_ head (header <> documentation <> articlePrews)
 
 buildPreview :: (FilePath, Markup.Document) -> Html.Structure
 buildPreview (file, document) =
