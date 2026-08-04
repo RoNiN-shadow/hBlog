@@ -11,8 +11,6 @@ import Numeric.Natural
 
 -- * Markup data types
 
---
-
 -- | type alias for list of Structures
 type Document = [Structure]
 
@@ -36,6 +34,7 @@ splitByEmptyLines = foldr step [[]]
     step line (p : ps) = case trim line of
       "" -> [] : p : ps
       _ -> (line : p) : ps
+    step line [] = [[line]]
 
 parseBox :: [String] -> Structure
 parseBox [] = Paragraph ""
