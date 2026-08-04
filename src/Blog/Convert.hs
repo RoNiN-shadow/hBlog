@@ -20,7 +20,11 @@ convertStructure st =
     Markup.CodeBlock cod ->
       Html.code_ $ unlines cod
 
--- | converts Markup doc to html
+-- | takes @/Env/@ the @/title/@ and the Markup document.
+--
+-- Converts to @/Html/@ type, adds the @/head/@ with the /BlogName/, stylesheet and meta.
+--
+-- Adds the BlogName which leads to index.html page, with article itself.
 convert :: Env -> String -> Markup.Document -> Html.Html
 convert env title doc =
   let head =
