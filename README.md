@@ -159,7 +159,3 @@ python -m http.server 8000 --directory docs
 ## License
 
 This project includes a LICENSE file (BSD-3-Clause).
-
----
-
-If you want, I can open a pull request with this README.md added instead of committing directly to the default branch.
