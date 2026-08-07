@@ -19,6 +19,10 @@ convertStructure st =
       Html.ol_ $ map (Html.p_ . Html.txt_) ls
     Markup.CodeBlock cod ->
       Html.code_ $ unlines cod
+    Markup.Date d ->
+      Html.p_ $
+        Html.txt_ $
+          "Date: " <> maybe "Somewhere in the universe" show d
 
 -- | takes @/Env/@ the @/title/@ and the Markup document.
 --

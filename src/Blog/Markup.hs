@@ -5,6 +5,7 @@ module Blog.Markup
   )
 where
 
+import Data.Time
 import Numeric.Natural
 
 ------------------------------
@@ -21,6 +22,7 @@ data Structure
   | UnorderedList [String]
   | OrderedList [String]
   | CodeBlock [String]
+  | Date (Maybe Day)
   deriving (Show, Eq)
 
 -- | Parses the string to Markup Document
@@ -43,8 +45,12 @@ parseBox allLines@(first : _) =
     ('*' : ' ' : text) -> Heading 1 (trim text)
     ('-' : ' ' : _) -> UnorderedList $ map (trim . drop 2) allLines
     ('#' : ' ' : _) -> OrderedList $ map (trim . drop 2) allLines
-    ('>' : ' ' : _) -> CodeBlock $ map (drop 2) allLines
+    ('>' : ' ' : _) -> CodeBlock $ map (trim . drop 2) allLines
+    ('~' : ' ' : text) -> Date $ parseIsoDay text
     _ -> Paragraph (unlines allLines)
+
+parseIsoDay :: String -> Maybe Day
+parseIsoDay = parseTimeM True defaultTimeLocale "%Y-%m-%d"
 
 trim :: String -> String
 trim = unwords . words

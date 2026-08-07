@@ -11,7 +11,9 @@ import qualified Blog.Markup as Markup
 import Control.Exception (SomeException (..), catch, displayException)
 import Control.Monad (void, when)
 import Control.Monad.Reader
-import Data.List (partition)
+import Data.List (partition, sortBy)
+import Data.Maybe (listToMaybe, mapMaybe)
+import Data.Time
 import Data.Traversable (for)
 import System.Directory
   ( copyFile,
@@ -73,6 +75,7 @@ data DirContents = DirContents
 
 -- * Build index page
 
+-- | Builds the index page
 buildIndex :: [(FilePath, Markup.Document)] -> Reader Env Html.Html
 buildIndex files = do
   env <- ask
@@ -88,7 +91,8 @@ buildIndex files = do
       documentation =
         Html.h_ 3 (Html.link_ "api/index.html" $ Html.txt_ "Documentation")
 
-      articlePrews = foldMap buildPreview files
+      sortedFiles = sortBy compareDocuments files
+      articlePrews = foldMap buildPreview sortedFiles
   pure $ Html.html_ head (header <> documentation <> articlePrews)
 
 buildPreview :: (FilePath, Markup.Document) -> Html.Structure
@@ -100,6 +104,16 @@ buildPreview (file, document) =
         <> Html.p_ (Html.link_ file (Html.txt_ "..."))
     _ ->
       Html.h_ 3 (Html.link_ file (Html.txt_ file))
+
+compareDocuments :: (FilePath, Markup.Document) -> (FilePath, Markup.Document) -> Ordering
+compareDocuments (_, doc1) (_, doc2) =
+  compare (extractDate doc2) (extractDate doc1)
+
+extractDate :: Markup.Document -> Maybe Day
+extractDate doc = listToMaybe (mapMaybe getDay doc)
+  where
+    getDay (Markup.Date mDay) = mDay
+    getDay _ = Nothing
 
 --------------------------
 
@@ -125,8 +139,6 @@ convertFile (file, doc) = do
 -----------------------------------
 
 -- * Output to directory
-
---
 
 -- | Creates an output directory or terminates the program
 createOutputDirectoryOrExit :: FilePath -> IO ()
