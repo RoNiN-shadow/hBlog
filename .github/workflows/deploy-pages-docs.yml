@@ -55,8 +55,9 @@ jobs:
 
       - name: Copy Haddock to docs folder
         run: |
+          rm -rf docs/api
           mkdir -p docs/api
-          cp -r dist-newstyle/build/x86_64-linux/ghc-*/blog-*/doc/html/blog/* docs/api/
+          rsync -a --delete dist-newstyle/build/x86_64-linux/ghc-*/blog-*/doc/html/blog/* docs/api/
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
