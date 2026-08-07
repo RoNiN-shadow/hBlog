@@ -1,5 +1,8 @@
 # hBlog
 
+[![Haskell](https://img.shields.io/badge/Haskell-5D4E9F?logo=haskell&logoColor=white)](https://ronin-shadow.github.io/hBlog/api/)
+[![Documentation](https://img.shields.io/badge/Documentation-API-blue?logo=readthedocs&logoColor=white)](https://ronin-shadow.github.io/hBlog/api/)
+
 Static web page builder written in Haskell. A small custom blog generator and my personal blog.
 
 ## What this does
