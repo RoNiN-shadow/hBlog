@@ -7,13 +7,13 @@ where
 import Blog.Convert (convert, convertStructure)
 import Blog.Env (Env (..))
 import qualified Blog.Html as Html
+import Blog.Markup (compareByDate)
 import qualified Blog.Markup as Markup
 import Control.Exception (SomeException (..), catch, displayException)
 import Control.Monad (void, when)
 import Control.Monad.Reader
+import Data.Function (on)
 import Data.List (partition, sortBy)
-import Data.Maybe (listToMaybe, mapMaybe)
-import Data.Time
 import Data.Traversable (for)
 import System.Directory
   ( copyFile,
@@ -91,7 +91,7 @@ buildIndex files = do
       documentation =
         Html.h_ 3 (Html.link_ "api/index.html" $ Html.txt_ "Documentation")
 
-      sortedFiles = sortBy compareDocuments files
+      sortedFiles = sortBy (compareByDate `on` snd) files
       articlePrews = foldMap buildPreview sortedFiles
   pure $ Html.html_ head (header <> documentation <> articlePrews)
 
@@ -104,16 +104,6 @@ buildPreview (file, document) =
         <> Html.p_ (Html.link_ file (Html.txt_ "..."))
     _ ->
       Html.h_ 3 (Html.link_ file (Html.txt_ file))
-
-compareDocuments :: (FilePath, Markup.Document) -> (FilePath, Markup.Document) -> Ordering
-compareDocuments (_, doc1) (_, doc2) =
-  compare (extractDate doc2) (extractDate doc1)
-
-extractDate :: Markup.Document -> Maybe Day
-extractDate doc = listToMaybe (mapMaybe getDay doc)
-  where
-    getDay (Markup.Date mDay) = mDay
-    getDay _ = Nothing
 
 --------------------------
 
